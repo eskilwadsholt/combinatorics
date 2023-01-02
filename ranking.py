@@ -44,3 +44,21 @@ def unrank(i, n, k):
     m, binom_m = largest_binom_below_index(i, k)
         
     return [ m ] + unrank(i - binom_m, m, k - 1)
+
+def to_one_index(x):
+    if type(x) == int:
+        return x + 1
+    if type(x) == list:
+        return [ e + 1 for e in x ]
+    
+def to_zero_index(x):
+    if type(x) == int:
+        return x - 1
+    if type(x) == list:
+        return [ e - 1 for e in x ]
+    
+def rank_one_index(C):
+    return to_one_index(rank(to_zero_index(C)))
+
+def unrank_one_index(i, n, k):
+    return to_one_index(unrank(to_zero_index(i), n, k))
